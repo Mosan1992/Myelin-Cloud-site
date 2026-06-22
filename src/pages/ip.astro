@@ -1,0 +1,7 @@
+---
+import Base from '../layouts/Base.astro';
+import IP from '../components/pages/IP.astro';
+import { pageMeta } from '../i18n/meta';
+const meta = pageMeta(Astro.currentLocale, 'ip');
+---
+<Base title={meta.title} description={meta.description}><IP /></Base>

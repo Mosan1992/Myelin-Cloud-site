@@ -1,0 +1,31 @@
+---
+import { useT } from '../../i18n/utils';
+const t = useT(Astro.currentLocale).contact;
+---
+<section class="page-hero">
+  <div class="wrap">
+    <div class="eyebrow">{t.eyebrow}</div>
+    <h1>{t.h1a}<span class="accent">{t.h1accent}</span>{t.h1b}</h1>
+    <p class="lede">{t.lede}</p>
+  </div>
+</section>
+
+<section class="reveal">
+  <div class="wrap">
+    <h2>{t.whoH}</h2>
+    <div class="grid g2" style="margin-top:30px">
+      {t.who.map((c) => (
+        <div class="card"><h3>{c.h}</h3><p>{c.p}</p></div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<section class="alt2 reveal">
+  <div class="wrap">
+    <div class="cta-box">
+      <div class="eyebrow" style="margin-bottom:12px">{t.emailLabel}</div>
+      <h2><a href={`mailto:${t.email}`} class="accent">{t.email}</a></h2>
+    </div>
+  </div>
+</section>

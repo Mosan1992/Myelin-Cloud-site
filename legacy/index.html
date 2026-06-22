@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>迈领云 Myelin Cloud · 夜间瘙痒监测与主动降温临床研究平台</title>
+<meta name="description" content="迈领云（深圳）科技有限公司 · Histo-Cooling 把夜间抓挠的监测、主动降温与数据记录集成在一台密封、可消毒的设备里，用于特应性皮炎、慢性荨麻疹等疾病的临床研究。" />
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+<script>document.documentElement.classList.add('js')</script>
+<style>
+  :root{
+    --bg:#FFFFFF; --bg2:#F5F8FB; --bg3:#EEF4FA;
+    --ink:#0C1B30; --ink2:#52647A; --ink3:#94A4B5;
+    --ice:#1488C8; --ice2:#2BA7DB; --blue:#1A5FBF;
+    --line:rgba(12,27,48,.09); --card:#FFFFFF;
+    --radius:20px; --max:1080px;
+    --grad:linear-gradient(120deg,var(--ice2),var(--blue));
+    --shadow:0 1px 2px rgba(16,40,70,.04), 0 14px 40px rgba(16,40,70,.06);
+    --shadow-hover:0 2px 6px rgba(16,40,70,.06), 0 24px 60px rgba(20,80,160,.12);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg); color:var(--ink);
+    font-family:"Inter","PingFang SC","Microsoft YaHei","Noto Sans SC",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+    line-height:1.65; -webkit-font-smoothing:antialiased; overflow-x:hidden;
+  }
+  /* bilingual toggle */
+  .en{display:none}
+  body.lang-en .zh{display:none}
+  body.lang-en .en{display:inline}
+  body.lang-en .en.block{display:block}
+  .en.block{display:none}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
+  section{padding:112px 0;position:relative}
+  .eyebrow{font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--ice);font-weight:600;margin-bottom:18px}
+  h2{font-size:clamp(26px,3.4vw,40px);line-height:1.2;font-weight:700;letter-spacing:-.01em;margin-bottom:18px}
+  h2 .accent{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .lede{color:var(--ink2);font-size:clamp(16px,1.7vw,19px);max-width:680px}
+  .muted{color:var(--ink3)}
+
+  /* nav */
+  header{position:sticky;top:0;z-index:50;backdrop-filter:blur(16px) saturate(1.4);background:rgba(255,255,255,.72);border-bottom:1px solid transparent;transition:background .3s,border-color .3s,box-shadow .3s}
+  header.scrolled{background:rgba(255,255,255,.82);border-bottom-color:var(--line);box-shadow:0 6px 24px rgba(16,40,70,.06)}
+  nav{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .logo{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:.02em}
+  .logo .mark{width:26px;height:26px;border-radius:8px;background:var(--grad);box-shadow:0 6px 18px rgba(30,111,196,.32)}
+  .logo small{display:block;font-size:11px;color:var(--ink3);font-weight:500;letter-spacing:.04em}
+  .nav-right{display:flex;align-items:center;gap:18px}
+  .nav-links{display:flex;gap:22px;font-size:14px;color:var(--ink2)}
+  .nav-links a:hover{color:var(--ink)}
+  .toggle{font-size:12.5px;border:1px solid var(--line);border-radius:999px;padding:6px 12px;color:var(--ink2);cursor:pointer;background:transparent;font-family:inherit;transition:.2s}
+  .toggle:hover{border-color:var(--ice);color:var(--ink)}
+  .btn{display:inline-block;position:relative;overflow:hidden;background:var(--grad);color:#fff;font-weight:650;padding:11px 20px;border-radius:999px;font-size:14px;transition:transform .25s cubic-bezier(.2,.7,.2,1),box-shadow .25s;box-shadow:0 8px 22px rgba(30,111,196,.28)}
+  .btn:hover{transform:translateY(-1px);box-shadow:0 12px 30px rgba(30,111,196,.42)}
+  .btn::after{content:"";position:absolute;top:0;left:-130%;width:55%;height:100%;background:linear-gradient(110deg,transparent,rgba(255,255,255,.5),transparent);transform:skewX(-18deg);pointer-events:none}
+  .btn:hover::after{animation:sheen .85s ease}
+  .btn.ghost{background:#fff;color:var(--ink);border:1px solid var(--line);box-shadow:0 1px 2px rgba(16,40,70,.04)}
+  .btn.ghost:hover{border-color:var(--ice);color:var(--ice)}
+  .btn.ghost::after{background:linear-gradient(110deg,transparent,rgba(43,167,219,.18),transparent)}
+  @media(max-width:720px){.nav-links{display:none}}
+
+  /* hero */
+  .hero{padding:120px 0 84px;text-align:left;position:relative}
+  .hero::before{content:"";position:absolute;top:-160px;right:-12%;width:720px;height:720px;background:radial-gradient(circle,rgba(43,167,219,.16),rgba(26,95,191,.05) 45%,transparent 66%);filter:blur(8px);z-index:0;pointer-events:none;will-change:transform;animation:floatA 20s ease-in-out infinite}
+  .hero::after{content:"";position:absolute;bottom:-180px;left:-14%;width:560px;height:560px;background:radial-gradient(circle,rgba(43,167,219,.09),transparent 64%);z-index:0;pointer-events:none;will-change:transform;animation:floatB 26s ease-in-out infinite}
+  .hero .wrap{position:relative;z-index:1}
+  .hero h1{font-size:clamp(32px,5.4vw,60px);line-height:1.08;font-weight:780;letter-spacing:-.02em;max-width:880px;margin-bottom:22px}
+  .hero h1 .accent{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero p{color:var(--ink2);font-size:clamp(16px,1.9vw,20px);max-width:660px;margin-bottom:34px}
+  .hero-cta{display:flex;gap:14px;flex-wrap:wrap}
+  .tag{display:inline-flex;align-items:center;gap:8px;font-size:13px;color:var(--ice);border:1px solid rgba(20,136,200,.22);background:rgba(43,167,219,.07);padding:7px 14px;border-radius:999px;margin-bottom:26px}
+  .tag .dot{width:7px;height:7px;border-radius:50%;background:var(--ice);box-shadow:0 0 0 4px rgba(43,167,219,.16)}
+
+  /* generic grid */
+  .grid{display:grid;gap:18px}
+  .g3{grid-template-columns:repeat(3,1fr)}
+  .g4{grid-template-columns:repeat(4,1fr)}
+  .g2{grid-template-columns:repeat(2,1fr)}
+  @media(max-width:900px){.g3,.g4{grid-template-columns:1fr 1fr}}
+  @media(max-width:600px){.g3,.g4,.g2{grid-template-columns:1fr}}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:28px;transition:.3s cubic-bezier(.2,.7,.2,1);box-shadow:var(--shadow)}
+  .card:hover{border-color:rgba(43,167,219,.4);transform:translateY(-4px);box-shadow:var(--shadow-hover)}
+  .card h3{font-size:18px;font-weight:680;margin-bottom:10px}
+  .card p{color:var(--ink2);font-size:14.5px}
+  .card .num{font-size:30px;font-weight:780;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:6px}
+  .kicker{font-size:12px;color:var(--ice);font-weight:600;letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px}
+
+  .alt{background:var(--bg2)}
+  .alt2{background:linear-gradient(180deg,var(--bg),var(--bg3))}
+  .figure{margin:36px 0 4px;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:var(--bg);box-shadow:var(--shadow)}
+  .figure img{display:block;width:100%;height:auto}
+  .figcap{font-size:12.5px;color:var(--ink3);text-align:center;margin-top:12px}
+
+  /* closed loop */
+  .loop{display:flex;align-items:stretch;gap:0;flex-wrap:wrap;margin-top:14px}
+  .loop .node{flex:1;min-width:170px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:24px;position:relative;box-shadow:var(--shadow);transition:.3s cubic-bezier(.2,.7,.2,1)}
+  .loop .node:hover{transform:translateY(-4px);box-shadow:var(--shadow-hover);border-color:rgba(43,167,219,.4)}
+  .loop .node .step{font-size:12px;color:var(--ice);font-weight:700;letter-spacing:.1em}
+  .loop .node h4{font-size:17px;margin:8px 0 6px;font-weight:680}
+  .loop .node p{font-size:13.5px;color:var(--ink2)}
+  .loop .arw{display:flex;align-items:center;justify-content:center;color:var(--ice);font-size:22px;padding:0 6px;opacity:.8}
+  @media(max-width:760px){.loop .arw{transform:rotate(90deg);padding:8px 0;width:100%}}
+  .loopback{margin-top:14px;text-align:center;color:var(--ink3);font-size:13px}
+  @media(min-width:761px){
+    .reveal.in .loop>.arw{animation:arwPulse 1.8s ease-in-out infinite}
+    .reveal.in .loop>.arw:nth-child(4){animation-delay:.22s}
+    .reveal.in .loop>.arw:nth-child(6){animation-delay:.44s}
+  }
+
+  /* impact arc */
+  .arc{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:18px}
+  @media(max-width:820px){.arc{grid-template-columns:1fr 1fr}}
+  @media(max-width:520px){.arc{grid-template-columns:1fr}}
+  .arc .step{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:24px;position:relative;overflow:hidden;box-shadow:var(--shadow);transition:.3s cubic-bezier(.2,.7,.2,1)}
+  .arc .step:hover{transform:translateY(-4px);box-shadow:var(--shadow-hover)}
+  .arc .step::after{content:"";position:absolute;left:0;top:0;height:3px;width:100%;background:var(--grad);opacity:.9}
+  .arc .step .lvl{font-size:12px;color:var(--ice);font-weight:700;letter-spacing:.12em}
+  .arc .step h4{font-size:16px;margin:8px 0 6px}
+  .arc .step p{font-size:13.5px;color:var(--ink2)}
+
+  /* moat stat band */
+  .band{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:8px}
+  @media(max-width:700px){.band{grid-template-columns:1fr}}
+  .stat{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:28px;box-shadow:var(--shadow)}
+  .stat .big{font-size:30px;font-weight:780;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+  /* roadmap */
+  .road{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:18px}
+  @media(max-width:820px){.road{grid-template-columns:1fr 1fr}}
+  @media(max-width:520px){.road{grid-template-columns:1fr}}
+  .ph{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow);transition:.3s cubic-bezier(.2,.7,.2,1)}
+  .ph:hover{transform:translateY(-4px);box-shadow:var(--shadow-hover)}
+  .ph .when{font-size:12px;color:var(--ice);font-weight:700}
+  .ph h4{font-size:16px;margin:6px 0 8px}
+  .ph p{font-size:13.5px;color:var(--ink2)}
+  .ph.live{border-color:rgba(43,167,219,.45);background:linear-gradient(180deg,rgba(43,167,219,.07),rgba(43,167,219,.02));box-shadow:0 2px 6px rgba(16,40,70,.05),0 18px 44px rgba(20,80,160,.1)}
+
+  /* ip pills */
+  .pills{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+  .pill{border:1px solid var(--line);border-radius:14px;padding:13px 17px;font-size:13.5px;background:var(--card);box-shadow:var(--shadow)}
+  .pill .s{font-size:11px;font-weight:700;padding:2px 9px;border-radius:999px;margin-right:8px}
+  .pill .filed{background:rgba(43,167,219,.14);color:var(--ice)}
+  .pill .soon{background:rgba(12,27,48,.04);color:var(--ink3);border:1px dashed var(--line)}
+
+  /* contact */
+  .cta-box{background:linear-gradient(120deg,rgba(43,167,219,.08),rgba(26,95,191,.05));border:1px solid rgba(43,167,219,.22);border-radius:28px;padding:56px 48px;text-align:center;box-shadow:0 2px 8px rgba(16,40,70,.05),0 30px 70px rgba(20,80,160,.1)}
+  .cta-box h2{margin-bottom:14px}
+  .cta-box .lede{margin:0 auto 28px}
+
+  footer{border-top:1px solid var(--line);padding:42px 0;color:var(--ink3);font-size:13px}
+  footer .frow{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px}
+  footer a:hover{color:var(--ice)}
+  .disclaimer{margin-top:22px;font-size:12px;color:var(--ink3);line-height:1.7;max-width:760px;border-left:2px solid var(--line);padding-left:14px}
+
+  .js .reveal{opacity:0;transform:translateY(22px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
+  .reveal.in{opacity:1;transform:none}
+  /* staggered children */
+  .js .reveal .card,.js .reveal .node,.js .reveal .step,.js .reveal .ph,.js .reveal .stat,.js .reveal .pill,.js .reveal .figure{opacity:0;transform:translateY(16px);transition:opacity .6s cubic-bezier(.2,.7,.2,1),transform .6s cubic-bezier(.2,.7,.2,1)}
+  .reveal.in .card,.reveal.in .node,.reveal.in .step,.reveal.in .ph,.reveal.in .stat,.reveal.in .pill,.reveal.in .figure{opacity:1;transform:none}
+  .reveal.in .figure{transition-duration:.9s}
+  .reveal.in :is(.card,.node,.step,.ph,.stat,.pill):nth-child(1){transition-delay:.04s}
+  .reveal.in :is(.card,.node,.step,.ph,.stat,.pill):nth-child(2){transition-delay:.10s}
+  .reveal.in :is(.card,.node,.step,.ph,.stat,.pill):nth-child(3){transition-delay:.16s}
+  .reveal.in :is(.card,.node,.step,.ph,.stat,.pill):nth-child(4){transition-delay:.22s}
+  .reveal.in :is(.card,.node,.step,.ph,.stat,.pill):nth-child(5){transition-delay:.28s}
+  .reveal.in :is(.card,.node,.step,.ph,.stat,.pill):nth-child(6){transition-delay:.34s}
+  .reveal.in :is(.card,.node,.step,.ph,.stat,.pill):nth-child(7){transition-delay:.40s}
+  @keyframes floatA{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-26px,22px) scale(1.06)}}
+  @keyframes floatB{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(24px,-18px) scale(1.08)}}
+  @keyframes sheen{to{left:150%}}
+  @keyframes arwPulse{0%,100%{opacity:.4;transform:translateX(0)}50%{opacity:1;transform:translateX(3px)}}
+  @media (prefers-reduced-motion: reduce){
+    .hero::before,.hero::after,.reveal.in .loop>.arw{animation:none}
+    .js .reveal,.js .reveal .card,.js .reveal .node,.js .reveal .step,.js .reveal .ph,.js .reveal .stat,.js .reveal .pill,.js .reveal .figure{transition-duration:.001s}
+  }
+</style>
+</head>
+<body class="lang-zh">
+
+<header>
+  <div class="wrap">
+    <nav>
+      <a class="logo" href="#top">
+        <span class="mark"></span>
+        <span>迈领云 Myelin Cloud<small class="zh">夜间瘙痒闭环临床平台</small><small class="en block">Nocturnal-Itch Clinical Platform</small></span>
+      </a>
+      <div class="nav-right">
+        <div class="nav-links">
+          <a href="#problem"><span class="zh">痛点</span><span class="en">Problem</span></a>
+          <a href="#solution"><span class="zh">方案</span><span class="en">Solution</span></a>
+          <a href="#tech"><span class="zh">技术</span><span class="en">Technology</span></a>
+          <a href="#ip"><span class="zh">知识产权</span><span class="en">IP</span></a>
+          <a href="#impact"><span class="zh">价值</span><span class="en">Impact</span></a>
+        </div>
+        <button class="toggle" onclick="toggleLang()"><span class="zh">EN</span><span class="en">中文</span></button>
+        <a class="btn" href="#contact"><span class="zh">联系我们</span><span class="en">Contact</span></a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<a id="top"></a>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap">
+    <span class="tag"><span class="dot"></span><span class="zh">临床研究级智能寝具平台 · 研发中</span><span class="en">Clinical-research smart-bedding platform · In development</span></span>
+    <h1>
+      <span class="zh">我们整夜监测<span class="accent">夜间抓挠</span>，并在发作时<span class="accent">主动降温</span>。</span>
+      <span class="en block">We measure nocturnal <span class="accent">scratching</span> as it happens, and <span class="accent">cool</span> the skin in response.</span>
+    </h1>
+    <p>
+      <span class="zh">Histo-Cooling 是一台密封设备。它在睡眠中监测抓挠，在抓挠发生时主动降温，并为每一次发作留下临床级的数据记录。我们为特应性皮炎、慢性荨麻疹等夜间瘙痒负担较重的疾病研究而做。</span>
+      <span class="en block">Histo-Cooling is a single sealed device. It watches for scratching during sleep, cools the skin when scratching starts, and keeps a clinical-grade record of every episode. We built it for research into atopic dermatitis, chronic urticaria, and similar conditions where night-time itch carries the burden.</span>
+    </p>
+    <div class="hero-cta">
+      <a class="btn" href="#solution"><span class="zh">了解技术</span><span class="en">Explore the technology</span></a>
+      <a class="btn ghost" href="#contact"><span class="zh">合作与投资</span><span class="en">Partner & invest</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section id="problem" class="alt reveal">
+  <div class="wrap">
+    <div class="eyebrow"><span class="zh">痛点</span><span class="en">The Problem</span></div>
+    <h2><span class="zh">最重要、却<span class="accent">最测不准</span>的临床终点</span><span class="en block">The most important endpoint nobody can <span class="accent">measure</span></span></h2>
+    <p class="lede"><span class="zh">夜间瘙痒是皮肤科疾病负担的核心指标，今天却仍靠病人次晨凭记忆打分。</span><span class="en block">Nocturnal itch is the core burden marker in dermatology, yet it's still scored from next-morning recall.</span></p>
+    <div class="grid g4" style="margin-top:34px">
+      <div class="card"><div class="kicker"><span class="zh">主观</span><span class="en">Subjective</span></div><p><span class="zh">UAS7 / SCORAD / NRS 全部依赖次晨主观回顾，系统性低估夜间发作。</span><span class="en">UAS7 / SCORAD / NRS all rely on morning recall, which systematically underestimates night events.</span></p></div>
+      <div class="card"><div class="kicker"><span class="zh">分辨率</span><span class="en">Resolution</span></div><p><span class="zh">无法区分同夜多次发作，缺时刻、时长与分布数据。</span><span class="en">Multiple episodes in one night blur together, with no timing, duration, or distribution.</span></p></div>
+      <div class="card"><div class="kicker"><span class="zh">无干预</span><span class="en">No intervention</span></div><p><span class="zh">抓挠仅靠腕动仪间接采集，且只记录、不干预。</span><span class="en">Actigraphy captures scratching only indirectly, and only records it. Nothing acts on it.</span></p></div>
+      <div class="card"><div class="kicker"><span class="zh">依从性</span><span class="en">Compliance</span></div><p><span class="zh">症状日记自第四周起依从性崩塌，纵向数据缺失。</span><span class="en">Diary compliance collapses after week four, leaving gaps in the longitudinal data.</span></p></div>
+    </div>
+  </div>
+</section>
+
+<!-- SOLUTION -->
+<section id="solution" class="reveal">
+  <div class="wrap">
+    <div class="eyebrow"><span class="zh">解决方案</span><span class="en">Our Solution</span></div>
+    <h2><span class="zh">一台密封设备，<span class="accent">闭合整个回路</span></span><span class="en block">One sealed device <span class="accent">closes the whole loop</span></span></h2>
+    <p class="lede"><span class="zh">监测、干预、记录、自适应，全部在一台无风扇、无水泵、可用消毒湿巾擦拭的 IP68 设备里完成。</span><span class="en block">Detect, respond, record, and adapt, all inside one fan-less, pump-less, disinfectant-wipeable IP68 device.</span></p>
+    <div class="loop">
+      <div class="node"><div class="step">01 · <span class="zh">监测</span><span class="en">DETECT</span></div><h4><span class="zh">识别抓挠</span><span class="en">Detect scratch</span></h4><p><span class="zh">惯性传感器 + 睡眠状态机 + 频域分析，自主识别有效抓挠发作。</span><span class="en">IMU + sleep state machine + frequency-domain analysis identify valid scratch episodes.</span></p></div>
+      <div class="arw">→</div>
+      <div class="node"><div class="step">02 · <span class="zh">干预</span><span class="en">INTERVENE</span></div><h4><span class="zh">主动降温</span><span class="en">Active cooling</span></h4><p><span class="zh">驱动降温，打断瘙痒抓挠循环，全程受固化安全包络约束。</span><span class="en">Cools the surface to break the itch-scratch cycle, bounded by a hard-coded safety envelope.</span></p></div>
+      <div class="arw">→</div>
+      <div class="node"><div class="step">03 · <span class="zh">记录</span><span class="en">RECORD</span></div><h4><span class="zh">签名数据</span><span class="en">Signed data</span></h4><p><span class="zh">带数字签名的时序事件，映射至 SCORAD / UAS7 / NRS 临床终点。</span><span class="en">Cryptographically signed time-series mapped to SCORAD / UAS7 / NRS endpoints.</span></p></div>
+      <div class="arw">→</div>
+      <div class="node"><div class="step">04 · <span class="zh">自适应</span><span class="en">ADAPT</span></div><h4><span class="zh">有效性反馈</span><span class="en">Efficacy feedback</span></h4><p><span class="zh">依据干预是否有效，动态调整强度（受安全边界钳制）。</span><span class="en">Adjusts intensity by whether the intervention worked (clamped to the safety envelope).</span></p></div>
+    </div>
+    <div class="loopback"><span class="zh">↻ 闭环持续运行，跨睡眠周期累积数据集</span><span class="en">↻ A continuous closed loop, accumulating a multi-night dataset</span></div>
+  </div>
+</section>
+
+<!-- TECH -->
+<section id="tech" class="alt reveal">
+  <div class="wrap">
+    <div class="eyebrow"><span class="zh">核心技术</span><span class="en">Core Technology</span></div>
+    <h2><span class="zh">三个相互锁合的<span class="accent">技术层</span></span><span class="en block">Three interlocking <span class="accent">layers</span></span></h2>
+    <figure class="figure">
+      <img src="device-concept.svg" alt="Histo-Cooling 结构概念剖视 / concept cross-section" loading="lazy" />
+    </figure>
+    <p class="figcap"><span class="zh">设备结构概念剖视：闭环监测干预 + 全密封被动散热架构（示意图，非最终外观）</span><span class="en">Concept cross-section: closed-loop intervention + fully-sealed passive-dissipation architecture (illustrative, not final appearance)</span></p>
+    <div class="grid g3" style="margin-top:34px">
+      <div class="card"><div class="kicker">A · <span class="zh">方法层</span><span class="en">Method</span></div><h3><span class="zh">闭环监测干预</span><span class="en">Closed-loop method</span></h3><p><span class="zh">睡眠状态机 + 频域抓挠识别 + 闭环干预序列 + 事件→临床终点映射。</span><span class="en">Sleep state machine + frequency-domain scratch detection + closed-loop intervention + event-to-endpoint mapping.</span></p></div>
+      <div class="card"><div class="kicker">B · <span class="zh">硬件层</span><span class="en">Hardware</span></div><h3><span class="zh">全密封主动降温</span><span class="en">Hermetic cooling</span></h3><p><span class="zh">半导体制冷 + 液态金属导热总线 + 相变材料缓冲，无风扇无水泵，IP68 可消毒。</span><span class="en">Thermoelectric cooling + liquid-metal thermal bus + PCM buffer; no fan, no pump; IP68, disinfectable.</span></p></div>
+      <div class="card"><div class="kicker">C · <span class="zh">数据安全层</span><span class="en">Data & safety</span></div><h3><span class="zh">临床级可信数据</span><span class="en">Trustworthy data</span></h3><p><span class="zh">固化安全包络 · 支撑双盲的假性干预模式 · 设备签名 · 离线导出 · 容错存储。</span><span class="en">Hard-coded safety envelope · sham mode for double-blinding · device signing · offline export · fault-tolerant storage.</span></p></div>
+    </div>
+
+    <!-- data sovereignty -->
+    <div class="grid g2" style="margin-top:18px">
+      <div class="card">
+        <div class="kicker"><span class="zh">数据主权与隐私</span><span class="en">Data sovereignty</span></div>
+        <h3><span class="zh">数据不出设备，导出可验证</span><span class="en">Data never leaves the device</span></h3>
+        <p><span class="zh">本地存储、无联网、无自动上传，仅用户主动发起时点对点本地导出；每次导出由设备唯一私钥在防篡改安全元件内签名，天然契合《个人信息保护法》与数据本地化要求。</span><span class="en">Stored locally, no internet, no auto-upload; export is local and point-to-point on user initiation, signed by a device-unique key inside a tamper-resistant secure element, which makes it inherently PIPL- and data-localization-compliant.</span></p>
+      </div>
+      <div class="card">
+        <div class="kicker"><span class="zh">"端"离线，"云"为研究平台</span><span class="en">Edge offline, cloud for research</span></div>
+        <h3><span class="zh">设备在端，分析在云</span><span class="en">Device at the edge</span></h3>
+        <p><span class="zh">设备端完全离线、本地签名；"云"仅指经授权的研究分析平台（签名校验、终点计算、多中心看板）。边缘采集与云端科研，各司其职。</span><span class="en">The device is fully offline and signs data locally; "cloud" refers only to the authorized research-analytics platform (signature verification, endpoint computation, multi-site dashboards). Edge capture and cloud research each do their own job.</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- IP & MOAT -->
+<section id="ip" class="reveal">
+  <div class="wrap">
+    <div class="eyebrow"><span class="zh">知识产权与护城河</span><span class="en">IP & Moat</span></div>
+    <h2><span class="zh">分层<span class="accent">专利墙</span>，而非单点</span><span class="en block">A layered <span class="accent">patent wall</span>, not a single filing</span></h2>
+    <div class="pills">
+      <div class="pill"><span class="s filed">已提交</span><span class="zh">发明专利母案 · 方法+设备+数据处理系统</span><span class="en">Invention patent · method + device + system</span></div>
+      <div class="pill"><span class="s filed">已提交</span><span class="zh">实用新型 · PCM+液态金属+IP68 结构</span><span class="en">Utility model · PCM + liquid-metal + IP68 structure</span></div>
+      <div class="pill"><span class="s soon">待提交</span><span class="zh">分案 · 盲法模式</span><span class="en">Divisional · blinding mode</span></div>
+      <div class="pill"><span class="s soon">待提交</span><span class="zh">分案 · 容错存储</span><span class="en">Divisional · fault-tolerant storage</span></div>
+      <div class="pill"><span class="s soon">规划中</span><span class="zh">更多分案布局中</span><span class="en">Further divisionals planned</span></div>
+    </div>
+    <div class="band" style="margin-top:26px">
+      <div class="stat"><div class="big">12–18<span style="font-size:15px"> <span class="zh">个月</span><span class="en">mo</span></span></div><p class="muted"><span class="zh">诚实复刻全密封主动降温硬件所需的时间，这是物理层面的护城河。</span><span class="en">The time to honestly replicate the sealed active-cooling hardware. That's a physics moat.</span></p></div>
+      <div class="stat"><div class="big">18–24<span style="font-size:15px"> <span class="zh">个月</span><span class="en">mo</span></span></div><p class="muted"><span class="zh">复刻可过审的临床级固件与数据完整性栈。</span><span class="en">For an audit-passing clinical-grade firmware & data-integrity stack.</span></p></div>
+      <div class="stat"><div class="big">24–36<span style="font-size:15px"> <span class="zh">个月</span><span class="en">mo</span></span></div><p class="muted"><span class="zh">复刻整套栈 + 临床验证 + 注册，且未必绕过专利家族。</span><span class="en">For the whole stack plus clinical validation and clearance, with no guarantee of clearing the patent family.</span></p></div>
+    </div>
+    <p class="lede" style="margin-top:24px"><span class="zh">真正的护城河是<strong style="color:var(--ink)">专利 + 临床数据 + 注册证 + 药企关系</strong>的组合，而非任何单一专利。</span><span class="en block">The real moat is the <strong style="color:var(--ink)">combination of patents, clinical data, regulatory clearance, and pharma relationships</strong>, not any single one.</span></p>
+  </div>
+</section>
+
+<!-- IMPACT -->
+<section id="impact" class="alt reveal">
+  <div class="wrap">
+    <div class="eyebrow"><span class="zh">价值</span><span class="en">Impact</span></div>
+    <h2><span class="zh">从<span class="accent">患者</span>，一直到<span class="accent">世界</span></span><span class="en block">From <span class="accent">patients</span> to the <span class="accent">world</span></span></h2>
+    <div class="arc">
+      <div class="step"><div class="lvl"><span class="zh">对患者</span><span class="en">PATIENTS</span></div><h4><span class="zh">改善睡眠与生活质量</span><span class="en">Sleep & quality of life</span></h4><p><span class="zh">客观量化夜间抓挠，并在发作时主动降温。</span><span class="en">Objectively quantify nocturnal scratching, and cool the skin as it flares.</span></p></div>
+      <div class="step"><div class="lvl"><span class="zh">对产业</span><span class="en">INDUSTRY</span></div><h4><span class="zh">客观夜间终点</span><span class="en">Objective endpoint</span></h4><p><span class="zh">为生物制剂研发提供客观终点，临床试验仪器进口替代。</span><span class="en">An objective endpoint for biologics R&D; import substitution for trial instruments.</span></p></div>
+      <div class="step"><div class="lvl"><span class="zh">对国家</span><span class="en">NATION</span></div><h4><span class="zh">数据主权与话语权</span><span class="en">Sovereignty & voice</span></h4><p><span class="zh">本土可控的高端医疗器械，提升中国临床研究国际可信度。</span><span class="en">A locally-controlled high-end device raising Chinese research credibility.</span></p></div>
+      <div class="step"><div class="lvl"><span class="zh">对世界</span><span class="en">WORLD</span></div><h4><span class="zh">全球健康</span><span class="en">Global health</span></h4><p><span class="zh">为全球瘙痒研究提供客观、可复现的夜间终点，作为开放标准，惠及各地患者。</span><span class="en">An objective, reproducible nocturnal endpoint for global itch research, offered as an open standard for patients everywhere.</span></p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ROADMAP -->
+<section class="reveal">
+  <div class="wrap">
+    <div class="eyebrow"><span class="zh">发展路线</span><span class="en">Roadmap</span></div>
+    <h2><span class="zh">从专利到<span class="accent">注册证</span></span><span class="en block">From patents to <span class="accent">clearance</span></span></h2>
+    <div class="road">
+      <div class="ph live"><div class="when"><span class="zh">现在</span><span class="en">Now</span></div><h4>Phase 0</h4><p><span class="zh">6+ 件分层专利布局，说明书冻结。</span><span class="en">6+ layered filings in place; spec frozen.</span></p></div>
+      <div class="ph"><div class="when">0–12<span class="zh">月</span><span class="en">mo</span></div><h4>Phase 1</h4><p><span class="zh">工程样机；台架验证；安全硬化；NMPA 预沟通。</span><span class="en">Prototype; bench validation; security hardening; NMPA pre-submission.</span></p></div>
+      <div class="ph"><div class="when">12–24<span class="zh">月</span><span class="en">mo</span></div><h4>Phase 2</h4><p><span class="zh">单中心临床先导；参照队列校准；药企/CRO 意向。</span><span class="en">Single-center pilot; reference-cohort calibration; pharma/CRO LOIs.</span></p></div>
+      <div class="ph"><div class="when">24–36<span class="zh">月</span><span class="en">mo</span></div><h4>Phase 3</h4><p><span class="zh">NMPA 二类注册；FDA De Novo 准备；首批临床试验部署。</span><span class="en">NMPA Class II; FDA De Novo prep; initial trial deployment.</span></p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="alt2 reveal">
+  <div class="wrap">
+    <div class="cta-box">
+      <h2><span class="zh">一起把它从纸面变成样机</span><span class="en block">Let's turn it from filings into a prototype</span></h2>
+      <p class="lede"><span class="zh">我们正寻求种子资金、研发资源与临床/药企合作。欢迎孵化器、投资人、皮肤科研究中心与生物制剂申办方联系。</span><span class="en block">We're raising seed funding and seeking R&D, clinical, and pharma partnerships. Incubators, investors, dermatology research centers, and biologics sponsors welcome.</span></p>
+      <a class="btn" href="mailto:founder@myelincloud.cn">founder@myelincloud.cn</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="frow">
+      <div>
+        <div style="color:var(--ink);font-weight:650;margin-bottom:6px">迈领云（深圳）科技有限公司</div>
+        <div>Myelin Cloud (Shenzhen) Technology Co., Ltd.</div>
+      </div>
+      <div style="text-align:right">
+        <div><a href="mailto:founder@myelincloud.cn">founder@myelincloud.cn</a></div>
+        <div class="muted">© 2026 Myelin Cloud · myelincloud.cn</div>
+        <!-- 备案后在此填写：粤ICP备XXXXXXXX号 (link to https://beian.miit.gov.cn) -->
+        <div class="muted"><a href="https://beian.miit.gov.cn" target="_blank" rel="noopener">粤ICP备 —— 号（备案后填写）</a></div>
+      </div>
+    </div>
+    <p class="disclaimer">
+      <span class="zh">免责声明：本网站所述产品（Histo-Cooling）目前处于研发阶段，尚未取得国家药品监督管理局（NMPA）医疗器械注册证。本页所有技术与功能描述仅用于技术交流、投资与合作沟通，不构成医疗器械广告、产品销售要约或任何诊断、治疗建议。专利状态以国家知识产权局官方记录为准。</span>
+      <span class="en block">Disclaimer: The product described (Histo-Cooling) is under development and has not obtained medical device registration from China's NMPA. All technical and functional descriptions on this page are for technical, investment, and partnership communication only, and do not constitute a medical device advertisement, an offer of sale, or any diagnostic or treatment advice. Patent status is subject to the official records of the CNIPA.</span>
+    </p>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
+<script>
+  function toggleLang(){
+    document.body.classList.toggle('lang-en');
+    document.body.classList.toggle('lang-zh');
+    document.documentElement.lang = document.body.classList.contains('lang-en') ? 'en' : 'zh-CN';
+  }
+  (function(){
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const hasGSAP = window.gsap && window.ScrollTrigger;
+    let lenis = null;
+
+    // smooth scroll
+    if(window.Lenis && !reduce){
+      lenis = new Lenis({duration:1.1, easing:t=>Math.min(1,1.001-Math.pow(2,-10*t))});
+      requestAnimationFrame(function raf(time){ lenis.raf(time); requestAnimationFrame(raf); });
+    }
+
+    // scroll reveals (GSAP if present, IntersectionObserver as fallback)
+    if(hasGSAP){
+      gsap.registerPlugin(ScrollTrigger);
+      if(lenis) lenis.on('scroll', ScrollTrigger.update);
+      document.querySelectorAll('.reveal').forEach(el=>{
+        ScrollTrigger.create({trigger:el, start:'top 84%', once:true, onEnter:()=>el.classList.add('in')});
+      });
+      if(!reduce){
+        gsap.from('.hero .tag,.hero h1,.hero p,.hero-cta',{opacity:0,y:26,duration:.9,ease:'power3.out',stagger:.12,delay:.1});
+      }
+    } else {
+      const io = new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }),{threshold:.12});
+      document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+    }
+
+    // smooth anchor jumps
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click',e=>{
+        const id = a.getAttribute('href'); if(id.length < 2) return;
+        const el = document.querySelector(id); if(!el) return;
+        e.preventDefault();
+        if(lenis) lenis.scrollTo(el,{offset:-70});
+        else el.scrollIntoView({behavior:reduce?'auto':'smooth'});
+      });
+    });
+
+    // header condense on scroll
+    const header = document.querySelector('header');
+    const onScroll = ()=>header.classList.toggle('scrolled', window.scrollY > 10);
+    onScroll(); addEventListener('scroll', onScroll, {passive:true});
+
+    // magnetic buttons (fine pointer only)
+    if(!reduce && matchMedia('(pointer:fine)').matches){
+      document.querySelectorAll('.btn').forEach(btn=>{
+        btn.addEventListener('mousemove',e=>{
+          const r = btn.getBoundingClientRect();
+          btn.style.transform = `translate(${(e.clientX-r.left-r.width/2)*0.18}px,${(e.clientY-r.top-r.height/2)*0.28}px)`;
+        });
+        btn.addEventListener('mouseleave',()=>{ btn.style.transform=''; });
+      });
+    }
+  })();
+</script>
+</body>
+</html>

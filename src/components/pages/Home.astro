@@ -1,0 +1,110 @@
+---
+import { useT, getLang, localePath } from '../../i18n/utils';
+const lang = getLang(Astro.currentLocale);
+const t = useT(Astro.currentLocale).home;
+---
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap">
+    <span class="tag"><span class="dot"></span>{t.tag}</span>
+    <h1>{t.h1a}<span class="accent">{t.h1accent1}</span>{t.h1b}<span class="accent">{t.h1accent2}</span>{t.h1c}</h1>
+    <p>{t.lede}</p>
+    <div class="hero-cta">
+      <a class="btn" href={localePath(lang, 'technology')}>{t.ctaPrimary}</a>
+      <a class="btn ghost" href={localePath(lang, 'contact')}>{t.ctaGhost}</a>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section class="alt reveal">
+  <div class="wrap">
+    <div class="eyebrow">{t.problemEyebrow}</div>
+    <h2>{t.problemH2a}<span class="accent">{t.problemAccent}</span>{t.problemH2b}</h2>
+    <p class="lede">{t.problemLede}</p>
+    <div class="grid g4" style="margin-top:34px">
+      {t.problems.map((c) => (
+        <div class="card"><div class="kicker">{c.k}</div><p>{c.t}</p></div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- SOLUTION -->
+<section class="reveal">
+  <div class="wrap">
+    <div class="eyebrow">{t.solutionEyebrow}</div>
+    <h2>{t.solutionH2a}<span class="accent">{t.solutionAccent}</span></h2>
+    <p class="lede">{t.solutionLede}</p>
+    <div class="loop">
+      {t.loop.map((n, i) => (
+        <Fragment>
+          {i > 0 && <div class="arw">→</div>}
+          <div class="node">
+            <div class="step">{n.n} · {n.s}</div>
+            <h4>{n.h}</h4>
+            <p>{n.p}</p>
+          </div>
+        </Fragment>
+      ))}
+    </div>
+    <div class="loopback">{t.loopback}</div>
+  </div>
+</section>
+
+<!-- TECH TEASER -->
+<section class="alt reveal">
+  <div class="wrap">
+    <div class="eyebrow">{t.techEyebrow}</div>
+    <h2>{t.techH2a}<span class="accent">{t.techAccent}</span></h2>
+    <div class="grid g3" style="margin-top:34px">
+      {t.layers.map((l) => (
+        <div class="card"><div class="kicker">{l.tag}</div><h3>{l.h}</h3><p>{l.p}</p></div>
+      ))}
+    </div>
+    <div style="margin-top:28px">
+      <a class="btn ghost" href={localePath(lang, 'technology')}>{t.techLink}</a>
+    </div>
+  </div>
+</section>
+
+<!-- IMPACT -->
+<section class="reveal">
+  <div class="wrap">
+    <div class="eyebrow">{t.impactEyebrow}</div>
+    <h2>{t.impactH2a}<span class="accent">{t.impactAccent1}</span>{t.impactH2b}<span class="accent">{t.impactAccent2}</span></h2>
+    <div class="arc">
+      {t.impact.map((s) => (
+        <div class="step"><div class="lvl">{s.lvl}</div><h4>{s.h}</h4><p>{s.p}</p></div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- ROADMAP -->
+<section class="alt reveal">
+  <div class="wrap">
+    <div class="eyebrow">{t.roadmapEyebrow}</div>
+    <h2>{t.roadmapH2a}<span class="accent">{t.roadmapAccent}</span></h2>
+    <div class="road">
+      {t.roadmap.map((p, i) => (
+        <div class={i === 0 ? 'ph live' : 'ph'}>
+          <div class="when">{p.when}</div>
+          <h4>{p.ph}</h4>
+          <p>{p.p}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT CTA -->
+<section class="alt2 reveal">
+  <div class="wrap">
+    <div class="cta-box">
+      <h2>{t.ctaH2}</h2>
+      <p class="lede">{t.ctaLede}</p>
+      <a class="btn" href={localePath(lang, 'contact')}>{t.ctaPrimary}</a>
+    </div>
+  </div>
+</section>

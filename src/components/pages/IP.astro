@@ -1,0 +1,37 @@
+---
+import { useT } from '../../i18n/utils';
+const t = useT(Astro.currentLocale).ip;
+---
+<section class="page-hero">
+  <div class="wrap">
+    <div class="eyebrow">{t.eyebrow}</div>
+    <h1>{t.h1a}<span class="accent">{t.h1accent}</span>{t.h1b}</h1>
+    <p class="lede">{t.lede}</p>
+  </div>
+</section>
+
+<section class="reveal">
+  <div class="wrap">
+    <div class="pills">
+      {t.pills.map((p) => (
+        <div class="pill"><span class={`s ${p.s === '已提交' || p.s === 'Filed' ? 'filed' : 'soon'}`}>{p.s}</span>{p.t}</div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<section class="alt reveal">
+  <div class="wrap">
+    <h2>{t.statsH}</h2>
+    <div class="band">
+      {t.stats.map((s) => (
+        <div class="stat">
+          <div class="big">{s.big}<span style="font-size:15px"> {s.unit}</span></div>
+          <p class="muted">{s.p}</p>
+        </div>
+      ))}
+    </div>
+    <p class="lede" style="margin-top:26px">{t.moat}</p>
+    <p class="note">{t.note}</p>
+  </div>
+</section>

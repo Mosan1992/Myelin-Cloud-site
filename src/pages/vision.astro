@@ -1,0 +1,7 @@
+---
+import Base from '../layouts/Base.astro';
+import Vision from '../components/pages/Vision.astro';
+import { pageMeta } from '../i18n/meta';
+const meta = pageMeta(Astro.currentLocale, 'vision');
+---
+<Base title={meta.title} description={meta.description}><Vision /></Base>

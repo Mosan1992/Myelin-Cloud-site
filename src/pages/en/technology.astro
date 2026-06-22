@@ -1,0 +1,7 @@
+---
+import Base from '../../layouts/Base.astro';
+import Technology from '../../components/pages/Technology.astro';
+import { pageMeta } from '../../i18n/meta';
+const meta = pageMeta(Astro.currentLocale, 'technology');
+---
+<Base title={meta.title} description={meta.description}><Technology /></Base>

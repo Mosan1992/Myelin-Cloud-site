@@ -1,0 +1,69 @@
+---
+import { useT } from '../../i18n/utils';
+const t = useT(Astro.currentLocale).technology;
+const home = useT(Astro.currentLocale).home;
+---
+<section class="page-hero">
+  <div class="wrap">
+    <div class="eyebrow">{t.eyebrow}</div>
+    <h1>{t.h1a}<span class="accent">{t.h1accent}</span>{t.h1b}</h1>
+    <p class="lede">{t.lede}</p>
+  </div>
+</section>
+
+<section class="reveal">
+  <div class="wrap">
+    <figure class="figure">
+      <img src="/device-concept.svg" alt="Histo-Cooling concept cross-section" loading="lazy" />
+    </figure>
+    <p class="figcap">{t.figcap}</p>
+  </div>
+</section>
+
+<!-- closed loop -->
+<section class="alt reveal">
+  <div class="wrap">
+    <h2>{t.loopH}</h2>
+    <div class="loop">
+      {home.loop.map((n, i) => (
+        <Fragment>
+          {i > 0 && <div class="arw">→</div>}
+          <div class="node">
+            <div class="step">{n.n} · {n.s}</div>
+            <h4>{n.h}</h4>
+            <p>{n.p}</p>
+          </div>
+        </Fragment>
+      ))}
+    </div>
+    <div class="loopback">{home.loopback}</div>
+  </div>
+</section>
+
+<!-- three layers -->
+<section class="reveal">
+  <div class="wrap">
+    <h2>{t.layersH}</h2>
+    <div class="grid g3" style="margin-top:30px">
+      {t.layersDetail.map((l) => (
+        <div class="card"><div class="kicker">{l.tag}</div><h3>{l.h}</h3><p>{l.p}</p></div>
+      ))}
+    </div>
+    <div class="specs">
+      {t.specs.map((s) => <span class="spec">{s}</span>)}
+    </div>
+  </div>
+</section>
+
+<!-- data sovereignty -->
+<section class="alt reveal">
+  <div class="wrap">
+    <h2>{t.sovereigntyH}</h2>
+    <div class="grid g2" style="margin-top:30px">
+      {t.sovereignty.map((c) => (
+        <div class="card"><h3>{c.h}</h3><p>{c.p}</p></div>
+      ))}
+    </div>
+    <p class="note">{t.note}</p>
+  </div>
+</section>

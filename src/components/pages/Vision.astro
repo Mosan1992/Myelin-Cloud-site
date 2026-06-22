@@ -1,0 +1,41 @@
+---
+import { useT } from '../../i18n/utils';
+const t = useT(Astro.currentLocale).vision;
+---
+<section class="page-hero">
+  <div class="wrap">
+    <div class="eyebrow">{t.eyebrow}</div>
+    <h1>{t.h1a}<span class="accent">{t.h1accent}</span>{t.h1b}</h1>
+    <p class="lede">{t.lede}</p>
+  </div>
+</section>
+
+<section class="reveal">
+  <div class="wrap">
+    <h2>{t.missionH}</h2>
+    <div class="prose"><p>{t.missionP}</p></div>
+  </div>
+</section>
+
+<section class="alt reveal">
+  <div class="wrap">
+    <h2>{t.arcH}</h2>
+    <p class="lede">{t.arcLede}</p>
+    <div class="arc">
+      {t.arc.map((s) => (
+        <div class="step"><div class="lvl">{s.lvl}</div><h4>{s.h}</h4><p>{s.p}</p></div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<section class="reveal">
+  <div class="wrap">
+    <h2>{t.horizonH}</h2>
+    <div class="grid g3" style="margin-top:30px">
+      {t.horizons.map((h) => (
+        <div class="card"><div class="kicker">{h.when}</div><p>{h.p}</p></div>
+      ))}
+    </div>
+  </div>
+</section>

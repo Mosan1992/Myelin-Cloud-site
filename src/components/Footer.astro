@@ -1,0 +1,33 @@
+---
+import { useT, getLang, localePath } from '../i18n/utils';
+
+const lang = getLang(Astro.currentLocale);
+const t = useT(Astro.currentLocale);
+
+const links = [
+  { label: t.nav.about, p: 'about' },
+  { label: t.nav.vision, p: 'vision' },
+  { label: t.nav.technology, p: 'technology' },
+  { label: t.nav.ip, p: 'ip' },
+  { label: t.nav.contact, p: 'contact' },
+];
+---
+<footer>
+  <div class="wrap">
+    <div class="frow">
+      <div>
+        <div style="color:var(--ink);font-weight:650;margin-bottom:6px">{t.footer.company}</div>
+        <div>{t.footer.companyEn}</div>
+        <div style="margin-top:10px"><a href={`mailto:${t.footer.email}`}>{t.footer.email}</a></div>
+      </div>
+      <div style="text-align:right">
+        <div class="fnav" style="justify-content:flex-end;margin-bottom:12px">
+          {links.map((l) => <a href={localePath(lang, l.p)}>{l.label}</a>)}
+        </div>
+        <div class="muted">{t.footer.copyright}</div>
+        <div class="muted"><a href="https://beian.miit.gov.cn" target="_blank" rel="noopener">{t.footer.beian}</a></div>
+      </div>
+    </div>
+    <p class="disclaimer">{t.footer.disclaimer}</p>
+  </div>
+</footer>
