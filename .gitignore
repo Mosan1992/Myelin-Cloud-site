@@ -1,5 +1,6 @@
 # build output
-dist/
+# dist/ is committed on purpose: Zeabur serves the prebuilt files with
+# Caddy (see Dockerfile) so the 2 GB server never runs a Node build.
 .astro/
 
 # dependencies

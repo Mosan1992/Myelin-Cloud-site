@@ -1,0 +1,12 @@
+# Keep the Docker build context tiny: only Caddyfile + dist/ are needed.
+node_modules
+.astro
+.git
+src
+legacy
+public
+astro.config.mjs
+tsconfig.json
+package.json
+package-lock.json
+*.md
