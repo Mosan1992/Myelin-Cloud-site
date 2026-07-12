@@ -1,15 +1,15 @@
 ---
-import { useT, getLang, localePath, otherLangs } from '../i18n/utils';
+import { useT, getLang, localePath, allLangs, LANG_LABEL } from '../i18n/utils';
 import Mark from './Mark.astro';
 
 const lang = getLang(Astro.currentLocale);
 const t = useT(Astro.currentLocale);
 
 let path = Astro.url.pathname;
-if (path.startsWith('/en') || path.startsWith('/ar')) path = path.slice(3);
+if (path.startsWith('/zh') || path.startsWith('/ar')) path = path.slice(3);
 path = path.replace(/^\/+|\/+$/g, '');
 
-const langs = otherLangs(lang, path);
+const langs = allLangs(lang, path);
 
 const links = [
   { label: t.nav.about, p: 'about' },
@@ -33,13 +33,33 @@ const links = [
             <a href={localePath(lang, l.p)} class={path === l.p ? 'active' : ''}>{l.label}</a>
           ))}
         </div>
-        <div class="langs">
-          {langs.map((l) => (
-            <a class="toggle" href={l.href} hreflang={l.lang} lang={l.lang} rel="alternate">{l.label}</a>
-          ))}
-        </div>
+        <details class="lang-menu">
+          <summary class="toggle" aria-label="Language">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3.6 9h16.8M3.6 15h16.8M12 3a17 17 0 0 1 0 18M12 3a17 17 0 0 0 0 18"/></svg>
+            {LANG_LABEL[lang]}
+            <svg class="chev" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+          </summary>
+          <ul>
+            {langs.map((l) => (
+              <li>
+                <a href={l.href} hreflang={l.lang} lang={l.lang} rel="alternate" aria-current={l.current ? 'true' : undefined}>
+                  {l.name}
+                  {l.current && <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="m5 13 4.5 4.5L19 7"/></svg>}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </details>
         <a class="btn" href={localePath(lang, 'contact')}>{t.nav.cta}</a>
       </div>
     </nav>
   </div>
 </header>
+<script is:inline>
+  // Close the language menu when clicking anywhere outside it.
+  document.addEventListener('click', (e) => {
+    document.querySelectorAll('details.lang-menu[open]').forEach((d) => {
+      if (!d.contains(e.target)) d.removeAttribute('open');
+    });
+  });
+</script>

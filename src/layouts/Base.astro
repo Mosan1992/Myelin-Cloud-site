@@ -13,7 +13,7 @@ const { title, description } = Astro.props;
 
 const lang = getLang(Astro.currentLocale);
 let path = Astro.url.pathname;
-if (path.startsWith('/en')) path = path.slice(3);
+if (path.startsWith('/zh') || path.startsWith('/ar')) path = path.slice(3);
 path = path.replace(/^\/+|\/+$/g, '');
 
 const origin = Astro.site ? Astro.site.toString().replace(/\/$/, '') : '';
@@ -35,7 +35,7 @@ const canonical = lang === 'en' ? enHref : lang === 'ar' ? arHref : zhHref;
     <link rel="alternate" hreflang="zh-Hans" href={zhHref} />
     <link rel="alternate" hreflang="en" href={enHref} />
     <link rel="alternate" hreflang="ar" href={arHref} />
-    <link rel="alternate" hreflang="x-default" href={zhHref} />
+    <link rel="alternate" hreflang="x-default" href={enHref} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />

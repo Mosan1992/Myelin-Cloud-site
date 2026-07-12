@@ -1,11 +1,11 @@
-// Single source of truth for all site copy, in both languages.
-// zh renders at /, en renders at /en/. Keep wording de-risked:
+// Single source of truth for all site copy, in all languages.
+// en renders at /, zh at /zh/, ar at /ar/. Keep wording de-risked:
 // no "first / 首个", no "treat / cure" efficacy claims for an
 // unregistered device. Describe what the hardware does: monitor,
 // detect, cool, record, sign, export.
 
 export type Lang = 'zh' | 'en' | 'ar';
-export const defaultLang: Lang = 'zh';
+export const defaultLang: Lang = 'en';
 export const languages: Record<Lang, string> = { zh: '中文', en: 'English', ar: 'العربية' };
 
 export const strings = {

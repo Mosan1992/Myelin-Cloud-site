@@ -4,10 +4,10 @@ import { defineConfig } from 'astro/config';
 export default defineConfig({
   site: 'https://myelincloud.cn',
   i18n: {
-    defaultLocale: 'zh',
+    defaultLocale: 'en',
     locales: ['zh', 'en', 'ar'],
     routing: {
-      prefixDefaultLocale: false, // zh at /, en at /en/, ar at /ar/
+      prefixDefaultLocale: false, // en at /, zh at /zh/, ar at /ar/
     },
   },
 });
