@@ -57,6 +57,9 @@ nav{display:flex;align-items:center;justify-content:space-between;height:64px}
 .logo small{display:block;font-family:var(--sans);font-size:11px;color:var(--ink3);font-weight:500;letter-spacing:.04em}
 .nav-right{display:flex;align-items:center;gap:18px}
 .nav-links{display:flex;gap:22px;font-size:14px;color:var(--ink2)}
+.nav-links a{position:relative;transition:color .2s}
+.nav-links a::after{content:"";position:absolute;inset-inline:0 100%;bottom:-5px;height:1.5px;background:var(--gold);transition:inset-inline-end .28s cubic-bezier(.2,.7,.2,1)}
+.nav-links a:hover::after,.nav-links a.active::after{inset-inline-end:0}
 .nav-links a:hover{color:var(--ink)}
 .nav-links a.active{color:var(--ink);font-weight:600}
 .toggle{font-size:12.5px;border:1px solid var(--line);border-radius:999px;padding:6px 12px;color:var(--ink2);cursor:pointer;background:rgba(255,255,255,.5);font-family:inherit;transition:.2s;display:inline-block}
@@ -80,6 +83,20 @@ nav{display:flex;align-items:center;justify-content:space-between;height:64px}
 .btn.ghost:hover{border-color:var(--gold);color:var(--gold-deep)}
 .btn.ghost::after{background:linear-gradient(110deg,transparent,rgba(168,137,78,.18),transparent)}
 @media(max-width:760px){.nav-links{display:none}}
+
+/* neural hero canvas */
+.neural-bg{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden;
+  -webkit-mask-image:linear-gradient(180deg,#000 0%,#000 64%,transparent 100%);
+  mask-image:linear-gradient(180deg,#000 0%,#000 64%,transparent 100%)}
+.neural-bg canvas{display:block;width:100%;height:100%;opacity:.6}
+
+/* word-split headline reveal */
+.wsplit{display:inline-block;will-change:transform}
+
+/* cursor-tracking glow on cards (—mx/—my set from Motion.astro) */
+.js :is(.card,.node,.arc .step,.ph,.stat,.fact,.cta-box){position:relative;--mx:50%;--my:50%}
+.js :is(.card,.node,.arc .step,.ph,.stat,.fact,.cta-box)::before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .35s;background:radial-gradient(240px circle at var(--mx) var(--my),rgba(168,137,78,.13),transparent 65%)}
+.js :is(.card,.node,.arc .step,.ph,.stat,.fact,.cta-box):hover::before{opacity:1}
 
 /* hero */
 .hero{padding:124px 0 92px;text-align:left;position:relative;overflow-x:clip}
@@ -222,6 +239,7 @@ footer a:hover{color:var(--gold-deep)}
 
 @media (prefers-reduced-motion: reduce){
   html{scroll-behavior:auto}
+  .js :is(.card,.node,.arc .step,.ph,.stat,.fact,.cta-box)::before{display:none}
   .hero::before,.hero::after,.reveal.in .loop>.arw,.tag .dot{animation:none}
   .js .reveal,.js .reveal .card,.js .reveal .node,.js .reveal .step,.js .reveal .ph,.js .reveal .stat,.js .reveal .pill,.js .reveal .fact,.js .reveal .figure{transition-duration:.001s}
 }

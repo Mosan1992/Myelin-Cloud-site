@@ -1,10 +1,12 @@
 ---
 import { useT, getLang, localePath } from '../../i18n/utils';
+import Neural from '../Neural.astro';
 const lang = getLang(Astro.currentLocale);
 const t = useT(Astro.currentLocale).company;
 ---
 <!-- HERO -->
 <section class="hero">
+  <Neural />
   <div class="wrap">
     <span class="tag"><span class="dot"></span>{t.tag}</span>
     <h1>{t.h1a}<span class="accent">{t.h1accent}</span>{t.h1b}</h1>
