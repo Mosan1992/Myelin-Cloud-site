@@ -14,7 +14,7 @@ const t = useT(Astro.currentLocale).ip;
   <div class="wrap">
     <div class="pills">
       {t.pills.map((p) => (
-        <div class="pill"><span class={`s ${p.s === '已提交' || p.s === 'Filed' ? 'filed' : 'soon'}`}>{p.s}</span>{p.t}</div>
+        <div class="pill"><span class={`s ${p.s === '已提交' || p.s === 'Filed' || p.s === 'مُودعة' ? 'filed' : 'soon'}`}>{p.s}</span>{p.t}</div>
       ))}
     </div>
   </div>
@@ -32,6 +32,5 @@ const t = useT(Astro.currentLocale).ip;
       ))}
     </div>
     <p class="lede" style="margin-top:26px">{t.moat}</p>
-    <p class="note">{t.note}</p>
   </div>
 </section>

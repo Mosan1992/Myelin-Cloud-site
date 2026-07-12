@@ -5,9 +5,9 @@ export default defineConfig({
   site: 'https://myelincloud.cn',
   i18n: {
     defaultLocale: 'zh',
-    locales: ['zh', 'en'],
+    locales: ['zh', 'en', 'ar'],
     routing: {
-      prefixDefaultLocale: false, // zh at /, en at /en/
+      prefixDefaultLocale: false, // zh at /, en at /en/, ar at /ar/
     },
   },
 });

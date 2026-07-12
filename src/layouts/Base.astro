@@ -3,7 +3,7 @@ import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import Motion from '../components/Motion.astro';
-import { getLang, localePath } from '../i18n/utils';
+import { getLang, localePath, dir } from '../i18n/utils';
 
 interface Props {
   title: string;
@@ -19,24 +19,39 @@ path = path.replace(/^\/+|\/+$/g, '');
 const origin = Astro.site ? Astro.site.toString().replace(/\/$/, '') : '';
 const zhHref = origin + localePath('zh', path);
 const enHref = origin + localePath('en', path);
-const htmlLang = lang === 'en' ? 'en' : 'zh-CN';
+const arHref = origin + localePath('ar', path);
+const htmlLang = lang === 'en' ? 'en' : lang === 'ar' ? 'ar' : 'zh-CN';
+const htmlDir = dir(lang);
+const canonical = lang === 'en' ? enHref : lang === 'ar' ? arHref : zhHref;
 ---
 <!doctype html>
-<html lang={htmlLang}>
+<html lang={htmlLang} dir={htmlDir}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    <link rel="canonical" href={lang === 'en' ? enHref : zhHref} />
+    <link rel="canonical" href={canonical} />
     <link rel="alternate" hreflang="zh-Hans" href={zhHref} />
     <link rel="alternate" hreflang="en" href={enHref} />
+    <link rel="alternate" hreflang="ar" href={arHref} />
     <link rel="alternate" hreflang="x-default" href={zhHref} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
-    <meta name="theme-color" content="#ffffff" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={origin + '/og.png'} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content={origin + '/og.png'} />
+    <meta name="theme-color" content="#fbf9f5" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+    {lang === 'ar' && <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet" />}
     <script is:inline>document.documentElement.classList.add('js')</script>
   </head>
   <body>

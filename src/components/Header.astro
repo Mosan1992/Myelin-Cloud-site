@@ -1,20 +1,22 @@
 ---
-import { useT, getLang, localePath, altLangPath } from '../i18n/utils';
+import { useT, getLang, localePath, otherLangs } from '../i18n/utils';
+import Mark from './Mark.astro';
 
 const lang = getLang(Astro.currentLocale);
 const t = useT(Astro.currentLocale);
 
 let path = Astro.url.pathname;
-if (path.startsWith('/en')) path = path.slice(3);
+if (path.startsWith('/en') || path.startsWith('/ar')) path = path.slice(3);
 path = path.replace(/^\/+|\/+$/g, '');
 
-const alt = altLangPath(lang, path);
+const langs = otherLangs(lang, path);
 
 const links = [
   { label: t.nav.about, p: 'about' },
-  { label: t.nav.vision, p: 'vision' },
+  { label: t.nav.histocooling, p: 'histo-cooling' },
   { label: t.nav.technology, p: 'technology' },
   { label: t.nav.ip, p: 'ip' },
+  { label: t.nav.vision, p: 'vision' },
   { label: t.nav.contact, p: 'contact' },
 ];
 ---
@@ -22,7 +24,7 @@ const links = [
   <div class="wrap">
     <nav>
       <a class="logo" href={localePath(lang, '')} aria-label={t.site.name}>
-        <span class="mark"></span>
+        <Mark />
         <span>{t.site.name}<small>{t.site.sub}</small></span>
       </a>
       <div class="nav-right">
@@ -31,7 +33,11 @@ const links = [
             <a href={localePath(lang, l.p)} class={path === l.p ? 'active' : ''}>{l.label}</a>
           ))}
         </div>
-        <a class="toggle" href={alt.href} hreflang={alt.lang} rel="alternate">{t.site.switchTo}</a>
+        <div class="langs">
+          {langs.map((l) => (
+            <a class="toggle" href={l.href} hreflang={l.lang} lang={l.lang} rel="alternate">{l.label}</a>
+          ))}
+        </div>
         <a class="btn" href={localePath(lang, 'contact')}>{t.nav.cta}</a>
       </div>
     </nav>
