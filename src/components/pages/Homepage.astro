@@ -1,0 +1,143 @@
+---
+// The true front door: a hub that samples every page (What We Do,
+// Histo-Cooling, Technology, Vision, IP, Contact) and links onward,
+// rather than retelling any single page's full narrative. All copy
+// is reused from the existing per-page strings — nothing new to
+// legal-review here.
+import { useT, getLang, localePath } from '../../i18n/utils';
+import Neural from '../Neural.astro';
+import Media from '../Media.astro';
+const lang = getLang(Astro.currentLocale);
+const strings = useT(Astro.currentLocale);
+const c = strings.company;
+const h = strings.home;
+const v = strings.vision;
+const ip = strings.ip;
+const about = strings.about;
+---
+<!-- HERO -->
+<section class="hero">
+  <Neural />
+  <div class="wrap">
+    <span class="tag"><span class="dot"></span>{c.tag}</span>
+    <h1>{c.h1a}<span class="accent">{c.h1accent}</span>{c.h1b}</h1>
+    <p>{c.lede}</p>
+    <div class="hero-cta">
+      <a class="btn" href={localePath(lang, 'histo-cooling')}>{c.ctaPrimary}</a>
+      <a class="btn ghost" href={localePath(lang, 'contact')}>{c.ctaGhost}</a>
+    </div>
+    <div style="max-width:640px">
+      <Media
+        src="/video/myelin-intro-en.mp4"
+        poster="/video/myelin-intro-poster.png"
+        caption={c.videoCaption}
+        ratio="16 / 9"
+        controls
+      />
+    </div>
+  </div>
+</section>
+
+<!-- WHAT WE DO -->
+<section class="alt reveal">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-label"><span class="sec-no">01</span><span class="eyebrow">{c.doEyebrow}</span></div>
+      <div class="sec-body">
+        <h2>{c.doH2a}<span class="accent">{c.doAccent}</span></h2>
+        <p class="lede">{c.doLede}</p>
+      </div>
+    </div>
+    <div class="grid g4">
+      {c.pillars.map((p) => (
+        <div class="card"><h3>{p.h}</h3><p>{p.p}</p></div>
+      ))}
+    </div>
+    <div style="margin-top:28px">
+      <a class="btn ghost" href={localePath(lang, 'about')}>{about.storyH} →</a>
+    </div>
+  </div>
+</section>
+
+<!-- FLAGSHIP PROJECT (dark interlude) -->
+<section class="dark reveal">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-label"><span class="sec-no">02</span><span class="eyebrow">{c.projEyebrow}</span></div>
+      <div class="sec-body">
+        <h2>{c.projH2a}<span class="accent">{c.projAccent}</span></h2>
+        <p class="lede">{c.projLede}</p>
+        <div class="hero-cta" style="margin-top:28px">
+          <a class="btn" href={localePath(lang, 'histo-cooling')}>{c.projCta}</a>
+        </div>
+        <p class="note" style="margin-top:30px">{c.pipeline}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TECHNOLOGY TEASER -->
+<section class="reveal">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-label"><span class="sec-no">03</span><span class="eyebrow">{h.techEyebrow}</span></div>
+      <div class="sec-body"><h2>{h.techH2a}<span class="accent">{h.techAccent}</span></h2></div>
+    </div>
+    <div class="grid g3">
+      {h.layers.map((l) => (
+        <div class="card"><div class="kicker">{l.tag}</div><h3>{l.h}</h3><p>{l.p}</p></div>
+      ))}
+    </div>
+    <div style="margin-top:28px">
+      <a class="btn ghost" href={localePath(lang, 'technology')}>{h.techLink}</a>
+    </div>
+  </div>
+</section>
+
+<!-- VISION TEASER -->
+<section class="alt reveal">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-label"><span class="sec-no">04</span><span class="eyebrow">{v.eyebrow}</span></div>
+      <div class="sec-body">
+        <h2>{v.arcH}</h2>
+        <p class="lede">{v.arcLede}</p>
+      </div>
+    </div>
+    <div class="arc">
+      {v.arc.map((s) => (
+        <div class="step"><div class="lvl">{s.lvl}</div><h4>{s.h}</h4><p>{s.p}</p></div>
+      ))}
+    </div>
+    <div style="margin-top:28px">
+      <a class="btn ghost" href={localePath(lang, 'vision')}>{v.h1a}{v.h1accent} →</a>
+    </div>
+  </div>
+</section>
+
+<!-- IP TEASER -->
+<section class="reveal">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-label"><span class="sec-no">05</span><span class="eyebrow">{ip.eyebrow}</span></div>
+      <div class="sec-body">
+        <h2>{ip.h1a}<span class="accent">{ip.h1accent}</span>{ip.h1b}</h2>
+        <p class="lede">{ip.lede}</p>
+        <div style="margin-top:20px">
+          <a class="btn ghost" href={localePath(lang, 'ip')}>{ip.eyebrow} →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT CTA -->
+<section class="alt2 reveal">
+  <div class="wrap">
+    <div class="cta-box">
+      <h2>{c.ctaH2}</h2>
+      <p class="lede">{c.ctaLede}</p>
+      <a class="btn" href={localePath(lang, 'contact')}>{c.ctaGhost}</a>
+    </div>
+  </div>
+</section>

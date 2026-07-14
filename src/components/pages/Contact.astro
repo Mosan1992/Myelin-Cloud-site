@@ -12,8 +12,11 @@ const t = useT(Astro.currentLocale).contact;
 
 <section class="reveal">
   <div class="wrap">
-    <h2>{t.whoH}</h2>
-    <div class="grid g2" style="margin-top:30px">
+    <div class="sec-head">
+      <div class="sec-label"><span class="sec-no">01</span></div>
+      <div class="sec-body"><h2>{t.whoH}</h2></div>
+    </div>
+    <div class="grid g2">
       {t.who.map((c) => (
         <div class="card"><h3>{c.h}</h3><p>{c.p}</p></div>
       ))}
@@ -21,9 +24,9 @@ const t = useT(Astro.currentLocale).contact;
   </div>
 </section>
 
-<section class="alt2 reveal">
+<section class="dark reveal">
   <div class="wrap">
-    <div class="cta-box">
+    <div class="cta-box" style="background:rgba(239,231,216,.04);border-color:rgba(201,168,101,.26)">
       <div class="eyebrow" style="margin-bottom:12px">{t.emailLabel}</div>
       <h2><a href={`mailto:${t.email}`} class="accent">{t.email}</a></h2>
     </div>

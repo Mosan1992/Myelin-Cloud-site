@@ -1,5 +1,6 @@
 ---
 import { useT } from '../../i18n/utils';
+import Journey from '../Journey.astro';
 const t = useT(Astro.currentLocale).technology;
 const home = useT(Astro.currentLocale).home;
 ---
@@ -21,30 +22,16 @@ const home = useT(Astro.currentLocale).home;
 </section>
 
 <!-- closed loop -->
-<section class="alt reveal">
-  <div class="wrap">
-    <h2>{t.loopH}</h2>
-    <div class="loop">
-      {home.loop.map((n, i) => (
-        <Fragment>
-          {i > 0 && <div class="arw">→</div>}
-          <div class="node">
-            <div class="step">{n.n} · {n.s}</div>
-            <h4>{n.h}</h4>
-            <p>{n.p}</p>
-          </div>
-        </Fragment>
-      ))}
-    </div>
-    <div class="loopback">{home.loopback}</div>
-  </div>
-</section>
+<Journey no="01" />
 
 <!-- three layers -->
 <section class="reveal">
   <div class="wrap">
-    <h2>{t.layersH}</h2>
-    <div class="grid g3" style="margin-top:30px">
+    <div class="sec-head">
+      <div class="sec-label"><span class="sec-no">02</span></div>
+      <div class="sec-body"><h2>{t.layersH}</h2></div>
+    </div>
+    <div class="grid g3">
       {t.layersDetail.map((l) => (
         <div class="card"><div class="kicker">{l.tag}</div><h3>{l.h}</h3><p>{l.p}</p></div>
       ))}
@@ -58,8 +45,11 @@ const home = useT(Astro.currentLocale).home;
 <!-- data sovereignty -->
 <section class="alt reveal">
   <div class="wrap">
-    <h2>{t.sovereigntyH}</h2>
-    <div class="grid g2" style="margin-top:30px">
+    <div class="sec-head">
+      <div class="sec-label"><span class="sec-no">03</span></div>
+      <div class="sec-body"><h2>{t.sovereigntyH}</h2></div>
+    </div>
+    <div class="grid g2">
       {t.sovereignty.map((c) => (
         <div class="card"><h3>{c.h}</h3><p>{c.p}</p></div>
       ))}

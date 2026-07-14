@@ -20,9 +20,12 @@ const t = useT(Astro.currentLocale).ip;
   </div>
 </section>
 
-<section class="alt reveal">
+<section class="dark reveal">
   <div class="wrap">
-    <h2>{t.statsH}</h2>
+    <div class="sec-head">
+      <div class="sec-label"><span class="sec-no">01</span></div>
+      <div class="sec-body"><h2>{t.statsH}</h2></div>
+    </div>
     <div class="band">
       {t.stats.map((s) => (
         <div class="stat">

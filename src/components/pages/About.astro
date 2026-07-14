@@ -12,24 +12,35 @@ const t = useT(Astro.currentLocale).about;
 
 <section class="reveal">
   <div class="wrap">
-    <h2>{t.storyH}</h2>
+    <div class="sec-head">
+      <div class="sec-label"><span class="sec-no">01</span></div>
+      <div class="sec-body"><h2>{t.storyH}</h2></div>
+    </div>
     <div class="prose">
       {t.story.map((p) => <p>{p}</p>)}
     </div>
   </div>
 </section>
 
-<section class="alt reveal">
+<section class="dark reveal">
   <div class="wrap">
-    <h2>{t.buildH}</h2>
-    <p class="lede">{t.buildP}</p>
+    <div class="sec-head">
+      <div class="sec-label"><span class="sec-no">02</span></div>
+      <div class="sec-body">
+        <h2>{t.buildH}</h2>
+        <p class="lede">{t.buildP}</p>
+      </div>
+    </div>
   </div>
 </section>
 
 <section class="reveal">
   <div class="wrap">
-    <h2>{t.principlesH}</h2>
-    <div class="grid g2" style="margin-top:30px">
+    <div class="sec-head">
+      <div class="sec-label"><span class="sec-no">03</span></div>
+      <div class="sec-body"><h2>{t.principlesH}</h2></div>
+    </div>
+    <div class="grid g2">
       {t.principles.map((c) => (
         <div class="card"><h3>{c.h}</h3><p>{c.p}</p></div>
       ))}
@@ -39,7 +50,10 @@ const t = useT(Astro.currentLocale).about;
 
 <section class="alt reveal">
   <div class="wrap">
-    <h2>{t.factsH}</h2>
+    <div class="sec-head">
+      <div class="sec-label"><span class="sec-no">04</span></div>
+      <div class="sec-body"><h2>{t.factsH}</h2></div>
+    </div>
     <div class="facts">
       {t.facts.map((f) => (
         <div class="fact"><div class="k">{f.k}</div><div class="v">{f.v}</div></div>

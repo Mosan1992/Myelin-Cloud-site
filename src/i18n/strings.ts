@@ -127,6 +127,7 @@ export const strings = {
         'Histo-Cooling 是一台密封设备，在睡眠中监测抓挠、在发作时主动降温，并为每一次发作留下临床级签名数据。面向特应性皮炎、慢性荨麻疹等夜间瘙痒负担较重的疾病研究。',
       projCta: '了解 Histo-Cooling',
       pipeline: '更多器械、耗材与专利正在研发布局中。',
+      videoCaption: '30 秒了解 Histo-Cooling',
       approachEyebrow: '我们的原则',
       approachH2a: '把严谨',
       approachAccent: '设为默认',
@@ -149,7 +150,7 @@ export const strings = {
       storyH: '我们从哪里开始',
       story: [
         '迈领云的起点，是一个朴素的判断：医学里有大量我们能治疗、却测不准的问题。最关键的客观证据、能被监管认可的终点，恰恰在最需要的地方缺席。我们要造的，就是把这些缺口补上的器械。',
-        '我们的第一款器械，瞄准的是皮肤科最难量化的问题之一——夜间瘙痒：临床试验至今仍主要依赖病人次晨凭记忆给出的评分。与其再造一个更精细的问卷，我们造了一台能在夜里真正记录抓挠、并在发作时给出物理干预的设备。而这套“先测准、再干预、全程留痕”的方法，正是我们研发每一款后续器械的方式。',
+        '我们的第一款器械，瞄准的是皮肤科最难量化的问题之一，夜间瘙痒。临床试验至今仍主要依赖病人次晨凭记忆给出的评分。与其再造一个更精细的问卷，我们造了一台能在夜里真正记录抓挠、并在发作时给出物理干预的设备。先测准，再干预，全程留痕，这是我们研发每一款后续器械时都会用的方式。',
       ],
       buildH: '我们如何造',
       buildP:
@@ -376,6 +377,7 @@ export const strings = {
         'Histo-Cooling is a sealed device that watches for scratching during sleep, cools the skin when it flares, and keeps a clinical-grade signed record of every episode. Built for research into atopic dermatitis, chronic urticaria, and similar night-time-itch conditions.',
       projCta: 'Explore Histo-Cooling',
       pipeline: 'More devices, consumables, and patents are in development.',
+      videoCaption: 'A 30-second overview of Histo-Cooling',
       approachEyebrow: 'How we work',
       approachH2a: 'Rigor as the ',
       approachAccent: 'default',
@@ -398,7 +400,7 @@ export const strings = {
       storyH: 'Where we started',
       story: [
         'Myelin Cloud was founded on a simple observation: medicine is full of conditions we treat but cannot measure well. The objective evidence, the endpoint a regulator will trust, is missing precisely where it matters most. We build the devices that close that gap.',
-        'Our first took aim at one of the hardest problems in dermatology to quantify, nocturnal itch, where trials still lean on the score a patient gives from next-morning memory. Rather than build a finer questionnaire, we built a device that records scratching through the night and responds when it happens. That method (measure objectively, intervene safely, record everything) is how we build every device that follows.',
+        'Our first took aim at one of the hardest problems in dermatology to quantify: nocturnal itch, where trials still lean on the score a patient gives from next-morning memory. Rather than build a finer questionnaire, we built a device that records scratching through the night and responds when it happens. Measure objectively, intervene safely, record everything: that is how we build every device that follows.',
       ],
       buildH: 'What we build',
       buildP:
@@ -629,6 +631,7 @@ export const strings = {
         'Histo-Cooling جهاز محكم الإغلاق يرصد الحكّ أثناء النوم، ويُبرّد البشرة عند اشتداده، ويحفظ سجلاً موقّعاً بمستوى سريري لكل نوبة. صُمّم لأبحاث التهاب الجلد التأتبي والشرى المزمن وما شابهها من حالات الحكّ الليلي.',
       projCta: 'استكشف Histo-Cooling',
       pipeline: 'أجهزة ومستهلكات وبراءات أخرى قيد التطوير.',
+      videoCaption: 'نظرة عامة في 30 ثانية على Histo-Cooling',
       approachEyebrow: 'كيف نعمل',
       approachH2a: 'الصرامة العلمية هي ',
       approachAccent: 'الأصل',
@@ -651,7 +654,7 @@ export const strings = {
       storyH: 'من أين بدأنا',
       story: [
         'تأسّست Myelin Cloud على ملاحظة بسيطة: الطبّ مليء بحالات نعالجها لكنّنا لا نُحسن قياسها. فالدليل الموضوعي، والمؤشر الذي تثق به الجهات التنظيمية، غائب تحديداً حيث تشتدّ الحاجة إليه. نحن نصنع الأجهزة التي تسدّ هذه الفجوة.',
-        'استهدف أول أجهزتنا واحدة من أصعب المشكلات قياساً في طبّ الجلد: الحكّة الليلية، حيث ما زالت التجارب تعتمد على تقييم يمنحه المريض من ذاكرة صباح اليوم التالي. وبدل بناء استبيان أدقّ، بنينا جهازاً يسجّل الحكّ طوال الليل ويستجيب له لحظة حدوثه. وهذه الطريقة — قياس موضوعي، وتدخّل آمن، وتسجيل لكل شيء — هي منهجنا في بناء كل جهاز يليه.',
+        'استهدف أول أجهزتنا واحدة من أصعب المشكلات قياساً في طبّ الجلد: الحكّة الليلية، حيث ما زالت التجارب تعتمد على تقييم يمنحه المريض من ذاكرة صباح اليوم التالي. وبدل بناء استبيان أدقّ، بنينا جهازاً يسجّل الحكّ طوال الليل ويستجيب له لحظة حدوثه. قياس موضوعي، وتدخّل آمن، وتسجيل لكل شيء: هذه هي الطريقة التي نبني بها كل جهاز يليه.',
       ],
       buildH: 'ما نبنيه',
       buildP:

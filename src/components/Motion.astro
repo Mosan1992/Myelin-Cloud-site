@@ -170,6 +170,55 @@
     section.addEventListener('pointerleave', () => { P.x = P.y = -1e4; }, { passive: true });
   }
 
+  /* ---------- pinned scroll journey (closed-loop chapter) ---------- */
+
+  function journey() {
+    document.querySelectorAll('.journey[data-journey]').forEach((section) => {
+      const steps = [...section.querySelectorAll('.j-step')];
+      const nodes = [...section.querySelectorAll('.j-node')];
+      const arc = section.querySelector('.j-arc');
+      if (!steps.length) return;
+
+      if (reduce || matchMedia('(max-width:900px)').matches) {
+        steps.forEach((s) => s.classList.add('active'));
+        nodes.forEach((n) => n.classList.add('active'));
+        return;
+      }
+
+      const circ = arc ? arc.getTotalLength() : 0;
+      if (arc) { arc.style.strokeDasharray = String(circ); arc.style.strokeDashoffset = String(circ); }
+      let current = -1;
+      ScrollTrigger.create({
+        trigger: section,
+        start: 'top top',
+        end: '+=' + steps.length * 320,
+        pin: true,
+        scrub: 0.6,
+        onUpdate(self) {
+          if (arc) arc.style.strokeDashoffset = String(circ * (1 - self.progress));
+          const idx = Math.min(steps.length - 1, Math.floor(self.progress * steps.length));
+          if (idx === current) return;
+          current = idx;
+          steps.forEach((s, i) => s.classList.toggle('active', i === idx));
+          nodes.forEach((n, i) => n.classList.toggle('active', i === idx));
+        },
+      });
+    });
+  }
+
+  /* ---------- ambient video loops: play only while on screen ---------- */
+
+  function videos() {
+    document.querySelectorAll('video[data-autoplay]').forEach((v) => {
+      if (v.dataset.init) return;
+      v.dataset.init = '1';
+      if (reduce) return;
+      new IntersectionObserver((es) => {
+        es.forEach((e) => (e.isIntersecting ? v.play().catch(() => {}) : v.pause()));
+      }, { threshold: 0.35 }).observe(v);
+    });
+  }
+
   /* ---------- per-page init (initial load + every view transition) ---------- */
 
   function initPage() {
@@ -216,6 +265,8 @@
     }
 
     document.querySelectorAll('canvas.neural').forEach(neural);
+    journey();
+    videos();
   }
 
   document.addEventListener('astro:page-load', initPage);

@@ -1,0 +1,28 @@
+---
+// Self-hosted video slot (for Higgsfield-generated loops or the
+// explainer film). Always poster-first and lazy: nothing downloads
+// until the slot nears the viewport, and Motion.astro plays/pauses
+// ambient loops via IntersectionObserver. Reduced-motion visitors see
+// only the poster. `controls` switches the slot from an ambient loop
+// to a click-to-play film with sound (never autoplayed).
+interface Props {
+  src: string;
+  poster: string;
+  caption?: string;
+  ratio?: string;
+  controls?: boolean;
+}
+const { src, poster, caption, ratio = '16 / 9', controls = false } = Astro.props;
+---
+<figure class="media">
+  <video
+    style={`aspect-ratio:${ratio}`}
+    poster={poster}
+    preload="none"
+    playsinline
+    {...(controls ? { controls: true } : { muted: true, loop: true, 'data-autoplay': true })}
+  >
+    <source src={src} type="video/mp4" />
+  </video>
+  {caption && <figcaption class="figcap">{caption}</figcaption>}
+</figure>

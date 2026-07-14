@@ -21,10 +21,14 @@ const t = useT(Astro.currentLocale).home;
 <!-- PROBLEM -->
 <section class="alt reveal">
   <div class="wrap">
-    <div class="eyebrow">{t.problemEyebrow}</div>
-    <h2>{t.problemH2a}<span class="accent">{t.problemAccent}</span>{t.problemH2b}</h2>
-    <p class="lede">{t.problemLede}</p>
-    <div class="grid g4" style="margin-top:34px">
+    <div class="sec-head">
+      <div class="sec-label"><span class="sec-no">01</span><span class="eyebrow">{t.problemEyebrow}</span></div>
+      <div class="sec-body">
+        <h2>{t.problemH2a}<span class="accent">{t.problemAccent}</span>{t.problemH2b}</h2>
+        <p class="lede">{t.problemLede}</p>
+      </div>
+    </div>
+    <div class="grid g4">
       {t.problems.map((c) => (
         <div class="card"><div class="kicker">{c.k}</div><p>{c.t}</p></div>
       ))}
@@ -32,12 +36,16 @@ const t = useT(Astro.currentLocale).home;
   </div>
 </section>
 
-<!-- SOLUTION -->
+<!-- SOLUTION: lightweight static loop (full pinned version lives on /technology) -->
 <section class="reveal">
   <div class="wrap">
-    <div class="eyebrow">{t.solutionEyebrow}</div>
-    <h2>{t.solutionH2a}<span class="accent">{t.solutionAccent}</span></h2>
-    <p class="lede">{t.solutionLede}</p>
+    <div class="sec-head">
+      <div class="sec-label"><span class="sec-no">02</span><span class="eyebrow">{t.solutionEyebrow}</span></div>
+      <div class="sec-body">
+        <h2>{t.solutionH2a}<span class="accent">{t.solutionAccent}</span></h2>
+        <p class="lede">{t.solutionLede}</p>
+      </div>
+    </div>
     <div class="loop">
       {t.loop.map((n, i) => (
         <Fragment>
@@ -57,9 +65,11 @@ const t = useT(Astro.currentLocale).home;
 <!-- TECH TEASER -->
 <section class="alt reveal">
   <div class="wrap">
-    <div class="eyebrow">{t.techEyebrow}</div>
-    <h2>{t.techH2a}<span class="accent">{t.techAccent}</span></h2>
-    <div class="grid g3" style="margin-top:34px">
+    <div class="sec-head">
+      <div class="sec-label"><span class="sec-no">03</span><span class="eyebrow">{t.techEyebrow}</span></div>
+      <div class="sec-body"><h2>{t.techH2a}<span class="accent">{t.techAccent}</span></h2></div>
+    </div>
+    <div class="grid g3">
       {t.layers.map((l) => (
         <div class="card"><div class="kicker">{l.tag}</div><h3>{l.h}</h3><p>{l.p}</p></div>
       ))}
@@ -73,8 +83,10 @@ const t = useT(Astro.currentLocale).home;
 <!-- IMPACT -->
 <section class="reveal">
   <div class="wrap">
-    <div class="eyebrow">{t.impactEyebrow}</div>
-    <h2>{t.impactH2a}<span class="accent">{t.impactAccent1}</span>{t.impactH2b}<span class="accent">{t.impactAccent2}</span></h2>
+    <div class="sec-head">
+      <div class="sec-label"><span class="sec-no">04</span><span class="eyebrow">{t.impactEyebrow}</span></div>
+      <div class="sec-body"><h2>{t.impactH2a}<span class="accent">{t.impactAccent1}</span>{t.impactH2b}<span class="accent">{t.impactAccent2}</span></h2></div>
+    </div>
     <div class="arc">
       {t.impact.map((s) => (
         <div class="step"><div class="lvl">{s.lvl}</div><h4>{s.h}</h4><p>{s.p}</p></div>
@@ -86,8 +98,10 @@ const t = useT(Astro.currentLocale).home;
 <!-- ROADMAP -->
 <section class="alt reveal">
   <div class="wrap">
-    <div class="eyebrow">{t.roadmapEyebrow}</div>
-    <h2>{t.roadmapH2a}<span class="accent">{t.roadmapAccent}</span></h2>
+    <div class="sec-head">
+      <div class="sec-label"><span class="sec-no">05</span><span class="eyebrow">{t.roadmapEyebrow}</span></div>
+      <div class="sec-body"><h2>{t.roadmapH2a}<span class="accent">{t.roadmapAccent}</span></h2></div>
+    </div>
     <div class="road">
       {t.roadmap.map((p, i) => (
         <div class={i === 0 ? 'ph live' : 'ph'}>
@@ -106,7 +120,7 @@ const t = useT(Astro.currentLocale).home;
     <div class="cta-box">
       <h2>{t.ctaH2}</h2>
       <p class="lede">{t.ctaLede}</p>
-      <a class="btn" href={localePath(lang, 'contact')}>{t.ctaPrimary}</a>
+      <a class="btn" href={localePath(lang, 'contact')}>{t.ctaGhost}</a>
     </div>
   </div>
 </section>
